@@ -8,6 +8,6 @@ public class camera : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(0, speed * Time.deltaTime, 0);
+        transform.Rotate(0, -speed * Time.deltaTime, 0);
     }
 }
