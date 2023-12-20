@@ -12,7 +12,7 @@ public class RandomSpawn : MonoBehaviour
         spawnPoints = new List<Transform>(spawnPoints);
         SpawnStars();
     }
-    void SpawnStars()
+    public void SpawnStars()
     {
         for (int i = 0; i < stars.Length; i++)
         {
@@ -21,4 +21,5 @@ public class RandomSpawn : MonoBehaviour
             spawnPoints.RemoveAt(spawn);
         }
     }
+
 }

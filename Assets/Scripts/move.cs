@@ -8,28 +8,14 @@ public class move : MonoBehaviour
 {
    [SerializeField] KeyCode keyOne;
     public float speed = 0.1f;
+    [SerializeField] RandomSpawn SpawnStars;
 
-    int count = 0;
-    public Text countText;
-    // Start is called before the first frame update
-    void Start()
-    {
-        count = 0;
-        countText.text = "—чет: " + count.ToString();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(keyOne))
         {
             Jump();
         };
-
-        /*
-            Vector3 direction = new Vector3(0, Input.GetAxisRaw("Vertical"), 0 );
-            transform.position += direction * _speed * Time.deltaTime;
-            //transform.LookAt(transform.position + direction);*/
         transform.Rotate(0, speed * Time.deltaTime, 0);
     }
 
@@ -43,11 +29,39 @@ public class move : MonoBehaviour
         if (col.tag == "Enemy")
         {
             SceneManager.LoadScene("SampleScene");
-            count++;
-            countText.text = "—чет: " + count.ToString();
+        }
+        if (col.tag == "Obstacle")
+        {
+            rb.mass += weightIncrease;
+            Invoke("ResetWeight", weightDecreaseTime);
+            Destroy(col.gameObject);
         }
     }
+  
+    private Rigidbody rb;
+    private float originalMass;
+    private float weightIncrease = 15f;
+    private float weightDecreaseTime = 2f;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        originalMass = rb.mass;
 
+    }
+
+    private void ResetWeight()
+    {
+
+        rb.mass = originalMass;
+    }
+
+    void ResetSpawn(Collider col)
+    {
+        if (col.tag == "Reset")
+        {
+            GetComponent<RandomSpawn>().SpawnStars();
+        }
+    }
 }
 
