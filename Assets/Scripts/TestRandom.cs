@@ -2,24 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Oblaka: MonoBehaviour
+public class TestRandom : MonoBehaviour
 {
-    public float spawn_delay = 10;
-    public float spawn_radius = 2f;
+
+    public float spawn_delay = 1.0f;
+    public float spawn_radius = 4f;
     public GameObject prefab;
     public Transform spawn_point;
     public float minHeight = -1f; // Минимальная высота цилиндра
     public float maxHeight = 1f; // Максимальная высота цилиндра
+    // Start is called before the first frame update
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) StartCoroutine("Cylinder_spawn");
+
+        if (Input.GetKeyDown(KeyCode.Alpha0)) StartCoroutine("Cylinder_spawn");
+
     }
 
     IEnumerator Cylinder_spawn()
     {
-        int spawn_count = 100;
+        int spawn_count = 400;
         GameObject parent = new GameObject("ParentObject");
         while (spawn_count > 0)
         {
@@ -50,4 +55,3 @@ public class Oblaka: MonoBehaviour
         }
     }
 }
-
